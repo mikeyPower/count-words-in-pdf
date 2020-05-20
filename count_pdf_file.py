@@ -7,6 +7,7 @@ import PyPDF2
 
 
 def getWordCount(data):
+	# get list of strings sperated by white space
 	data=data.split()
 	#print(data)
 	return len(data)
@@ -32,14 +33,16 @@ def main():
 		numPages = pdfReader.numPages
 
 		for i in range(numPages):
+			# get the first page of the pdf
 			pageObj = pdfReader.getPage(i)
+			# extract all text as a string
 			text = pageObj.extractText()
-			new_text = re.sub('\s+',' ',text)
-			totalWords+=getWordCount(new_text.strip())
+			#new_text = re.sub('\s+',' ',text)
+			totalWords+=getWordCount(text.strip())
 
 
 		time.sleep(1)
-		print (str(totalWords) +" in "+pdfFile)
+		print (str(totalWords) +" words in "+pdfFile)
 
 if __name__ == '__main__':
 	main()
